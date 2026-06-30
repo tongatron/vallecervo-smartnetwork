@@ -3,6 +3,7 @@ import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Why from './components/Why'
 import Architecture from './components/Architecture'
+import Meshtastic from './components/Meshtastic'
 import MapSection from './components/Map3D/MapSection'
 import Phases from './components/Phases'
 import Costs from './components/Costs'
@@ -21,6 +22,7 @@ export default function App() {
         <Hero />
         <Why />
         <Architecture />
+        <Meshtastic />
         <MapSection activePhase={activePhase} setActivePhase={setActivePhase} />
         <Phases activePhase={activePhase} setActivePhase={setActivePhase} />
         <Costs />

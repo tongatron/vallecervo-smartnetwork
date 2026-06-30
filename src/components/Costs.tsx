@@ -1,8 +1,12 @@
-import { Euro, Info } from 'lucide-react'
+import { Euro, Info, HelpCircle } from 'lucide-react'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, CartesianGrid,
+  PieChart, Pie, Cell,
 } from 'recharts'
-import { costItems, phaseCosts, totalCapex, totalOpexYear, costsDisclaimer } from '../data/costs'
+import {
+  costItems, phaseCosts, totalCapex, totalOpexYear, costsDisclaimer,
+  opexByCategory, opexExplain, categoryColor,
+} from '../data/costs'
 
 const fmt = (n: number) => n.toLocaleString('it-IT')
 
@@ -60,12 +64,55 @@ export default function Costs() {
           </div>
         </div>
 
+        {/* Composizione OPEX + spiegazione: a cosa sono dovuti i costi annui */}
+        <div className="card" style={{ marginTop: 20, paddingTop: 28 }}>
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+            <HelpCircle size={18} /> A cosa è dovuto il costo annuo?
+          </h3>
+          <p style={{ color: 'var(--text-dim)', marginBottom: 20 }}>
+            <strong>Non al consumo elettrico dei dispositivi</strong>: i sensori funzionano anni con una
+            sola batteria (trasmettono pochi byte, pochi secondi al giorno). I gateway richiedono
+            alimentazione continua, ma dove manca la rete elettrica si usa un kit solare a costo una
+            tantum, non un canone energia ricorrente. L’OPEX nasce quasi tutto da canoni e logistica.
+          </p>
+          <div className="grid grid-2">
+            <div style={{ width: '100%', height: 260 }}>
+              <ResponsiveContainer>
+                <PieChart>
+                  <Pie data={opexByCategory} dataKey="value" nameKey="category" innerRadius={55} outerRadius={90} paddingAngle={2}>
+                    {opexByCategory.map((s) => (
+                      <Cell key={s.category} fill={categoryColor[s.category]} stroke="none" />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(v: number) => `${fmt(v)} €/anno`}
+                    contentStyle={{ background: '#131f30', border: '1px solid #25344a', borderRadius: 10, color: '#E8EEF4' }}
+                  />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, justifyContent: 'center' }}>
+              {opexExplain.map((e) => (
+                <div key={e.label} style={{ display: 'flex', gap: 10 }}>
+                  <span style={{ width: 10, height: 10, borderRadius: '50%', background: categoryColor[e.label as keyof typeof categoryColor] ?? 'var(--azzurro)', flexShrink: 0, marginTop: 6 }} />
+                  <div>
+                    <strong style={{ fontSize: 14 }}>{e.label}</strong>
+                    <p style={{ margin: '2px 0 0', color: 'var(--text-dim)', fontSize: 13, lineHeight: 1.5 }}>{e.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="card" style={{ marginTop: 20, overflowX: 'auto' }}>
           <h3 style={{ marginBottom: 16 }}>Dettaglio voci</h3>
-          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 560 }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, minWidth: 640 }}>
             <thead>
               <tr style={{ textAlign: 'left', color: 'var(--text-dim)' }}>
                 <th style={{ padding: '8px 6px' }}>Voce</th>
+                <th style={{ padding: '8px 6px' }}>Categoria</th>
                 <th style={{ padding: '8px 6px' }}>Fase</th>
                 <th style={{ padding: '8px 6px', textAlign: 'right' }}>CAPEX</th>
                 <th style={{ padding: '8px 6px', textAlign: 'right' }}>OPEX/anno</th>
@@ -78,9 +125,12 @@ export default function Costs() {
                     <div>{c.label}</div>
                     <div style={{ color: 'var(--text-dim)', fontSize: 12 }}>{c.detail}</div>
                   </td>
+                  <td style={{ padding: '10px 6px' }}>
+                    <span className="pill" style={{ borderColor: categoryColor[c.category], color: 'var(--text)' }}>{c.category}</span>
+                  </td>
                   <td style={{ padding: '10px 6px' }}>{c.phase}</td>
                   <td style={{ padding: '10px 6px', textAlign: 'right' }}>{fmt(c.capex)} €</td>
-                  <td style={{ padding: '10px 6px', textAlign: 'right' }}>{fmt(c.opexYear)} €</td>
+                  <td style={{ padding: '10px 6px', textAlign: 'right' }}>{c.opexYear ? `${fmt(c.opexYear)} €` : '—'}</td>
                 </tr>
               ))}
             </tbody>

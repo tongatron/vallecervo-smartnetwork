@@ -33,6 +33,60 @@ export const architecture = {
     { name: 'Node-RED', role: 'Automazioni e allerte' },
   ],
   backhaul: ['Fibra ottica', 'Ponte radio', '4G/5G', 'Starlink (aree isolate)'],
+  power: ['Rete elettrica (centri abitati)', 'Solare + batteria (vette e siti isolati)'],
+}
+
+// Portata indicativa dei dispositivi radio, per il grafico in sezione Tecnologia/Meshtastic.
+// Valori tipici, fortemente dipendenti da orografia, vegetazione e linea di vista (LoS).
+export const rangeData = [
+  { tech: 'Meshtastic nodo↔nodo (bosco/abitato)', km: 2 },
+  { tech: 'LoRaWAN gateway↔sensore (fondovalle)', km: 5 },
+  { tech: 'Meshtastic nodo↔nodo (crinale, LoS)', km: 8 },
+  { tech: 'LoRaWAN gateway↔sensore (vetta, LoS)', km: 15 },
+]
+
+export const meshtastic = {
+  title: 'Meshtastic — comunicazione e GPS off-grid',
+  intro:
+    'Accanto alla rete LoRaWAN, la Valle Cervo può ospitare anche una rete Meshtastic: dispositivi tascabili open source che parlano tra loro in modalità mesh, senza bisogno di SIM, internet o un gestore di rete.',
+  characteristics: [
+    {
+      title: 'Funzionamento a nodi (mesh)',
+      text: 'Ogni dispositivo è un nodo che riceve e ritrasmette i messaggi dei nodi vicini, "saltando" di nodo in nodo (multi-hop) fino a destinazione: non serve un gateway centrale come in LoRaWAN.',
+    },
+    {
+      title: 'Nessuna infrastruttura richiesta',
+      text: 'I dispositivi formano la rete tra loro: bastano alcuni nodi sui crinali/sentieri per estendere la copertura, anche dove non c’è nessun gateway LoRaWAN.',
+    },
+    {
+      title: 'Messaggistica e GPS off-grid',
+      text: 'Messaggi di testo cifrati e condivisione della posizione GPS tra escursionisti, anche senza copertura cellulare.',
+    },
+    {
+      title: 'Nessun canone',
+      text: 'Nessuna SIM, nessun abbonamento: solo l’acquisto del dispositivo (~80–150 € l’uno).',
+    },
+    {
+      title: 'Autonomia lunga',
+      text: 'Batteria che dura giorni o settimane, ricaricabile anche con un piccolo pannello solare portatile.',
+    },
+    {
+      title: 'Open source',
+      text: 'Firmware e protocollo aperti, comunità attiva, hardware economico basato su chip LoRa.',
+    },
+  ],
+  comparison: [
+    { aspect: 'Topologia', lorawan: 'A stella (sensori → gateway)', mesh: 'A maglia (nodo → nodo → nodo)' },
+    { aspect: 'Infrastruttura', lorawan: 'Richiede gateway fissi', mesh: 'I dispositivi stessi sono la rete' },
+    { aspect: 'Uso tipico', lorawan: 'Sensori fissi, invio dati periodico', mesh: 'Persone in movimento, messaggi e GPS' },
+    { aspect: 'Connessione a Internet', lorawan: 'Sempre (via gateway)', mesh: 'Opzionale (solo se un nodo fa da bridge)' },
+    { aspect: 'Costi ricorrenti', lorawan: 'Canone dati/satellite sui gateway', mesh: 'Nessuno' },
+  ],
+  hiking: {
+    title: 'GPS e sicurezza per escursionisti',
+    text:
+      'Un piccolo numero di dispositivi Meshtastic, distribuiti tra rifugi, bivacchi e punti panoramici della Valle Cervo, può offrire a escursionisti e soccorso alpino: condivisione in tempo reale della posizione GPS del gruppo, messaggistica di testo anche senza campo, e un pulsante SOS che inoltra l’allarme di nodo in nodo fino al primo punto con connettività (rifugio o gateway LoRaWAN/Internet).',
+  },
 }
 
 export const governance = {

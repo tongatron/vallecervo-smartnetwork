@@ -3,6 +3,7 @@ import { Radio } from 'lucide-react'
 const links = [
   ['#perche', 'Perché'],
   ['#architettura', 'Tecnologia'],
+  ['#meshtastic', 'Meshtastic'],
   ['#mappa', 'Mappa 3D'],
   ['#fasi', 'Fasi'],
   ['#costi', 'Costi'],

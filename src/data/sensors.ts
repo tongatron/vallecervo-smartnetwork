@@ -9,6 +9,7 @@ export type SensorCategory =
   | 'agricoltura' // umidità suolo, irrigazione, bestiame
   | 'turismo'     // conta-escursionisti, SOS, meteo rifugi
   | 'comuni'      // illuminazione, contatori acqua, rifiuti, aria, parcheggi
+  | 'meshtastic'  // nodi mesh GPS/SOS per escursionisti, indipendenti dal LoRaWAN
 
 export interface SensorType {
   id: string
@@ -17,7 +18,7 @@ export interface SensorType {
   lat: number
   lon: number
   phase: 1 | 2 | 3
-  gateway: string
+  gateway: string // sito LoRaWAN più vicino (o nodo mesh di riferimento)
 }
 
 export const categoryMeta: Record<SensorCategory, { label: string; color: string }> = {
@@ -27,6 +28,7 @@ export const categoryMeta: Record<SensorCategory, { label: string; color: string
   agricoltura: { label: 'Agricoltura', color: '#2E7D5B' },
   turismo: { label: 'Turismo', color: '#C77DFF' },
   comuni: { label: 'Servizi comunali', color: '#9AA7B5' },
+  meshtastic: { label: 'Meshtastic GPS/SOS', color: '#FF6B6B' },
 }
 
 export const sensors: SensorType[] = [
@@ -46,4 +48,9 @@ export const sensors: SensorType[] = [
   { id: 's14', name: 'Parcheggio Oropa (occupazione)', category: 'comuni', lat: 45.626, lon: 7.980, phase: 3, gateway: 'gw-oropa' },
   { id: 's15', name: 'Contatore acqua — Rosazza', category: 'comuni', lat: 45.693, lon: 7.970, phase: 3, gateway: 'gw-rosazza' },
   { id: 's16', name: 'Qualità aria — Andorno', category: 'comuni', lat: 45.592, lon: 8.060, phase: 3, gateway: 'gw-andorno' },
+  // Nodi Meshtastic: rete mesh indipendente per GPS e SOS escursionisti sui sentieri
+  { id: 'm1', name: 'Nodo mesh — Bocchetta di Margosio', category: 'meshtastic', lat: 45.672, lon: 7.935, phase: 3, gateway: 'gw-mucrone' },
+  { id: 'm2', name: 'Nodo mesh — Rifugio Coda', category: 'meshtastic', lat: 45.655, lon: 7.918, phase: 3, gateway: 'gw-mucrone' },
+  { id: 'm3', name: 'Nodo mesh — Alpe Camparient', category: 'meshtastic', lat: 45.712, lon: 7.940, phase: 3, gateway: 'gw-montesinaro' },
+  { id: 'm4', name: 'Nodo mesh — Conca di Oropa', category: 'meshtastic', lat: 45.634, lon: 7.970, phase: 3, gateway: 'gw-oropa' },
 ]

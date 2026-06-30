@@ -111,7 +111,8 @@ export default function MapSection({ activePhase, setActivePhase }: Props) {
                   <h3 style={{ margin: '12px 0 4px' }}>{selGw.name}</h3>
                   <p style={{ color: 'var(--text-dim)', fontSize: 13, margin: '0 0 12px' }}>{selGw.comune}</p>
                   <Row label="Backhaul" value={selGw.backhaul} />
-                  <Row label="Copertura" value="stilizzata" />
+                  <Row label="Alimentazione" value={selGw.power} />
+                  <Row label="Copertura" value={`~${selGw.coverageKm} km`} />
                   <p style={{ color: 'var(--text-dim)', fontSize: 13, marginTop: 12, lineHeight: 1.5 }}>{selGw.note}</p>
                 </>
               )}

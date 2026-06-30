@@ -43,6 +43,14 @@ export const applications: Application[] = [
     benefit: 'Efficienza e risparmio nei servizi pubblici comunali.',
   },
   {
+    id: 'escursionisti',
+    title: 'Sicurezza escursionisti (GPS)',
+    icon: 'Compass',
+    category: 'meshtastic',
+    examples: ['Condivisione posizione GPS', 'Messaggistica off-grid', 'Pulsante SOS', 'Tracciamento gruppi'],
+    benefit: 'Comunicazione e localizzazione anche dove non arriva il cellulare, senza SIM né canoni, tramite dispositivi Meshtastic a mesh.',
+  },
+  {
     id: 'ricerca',
     title: 'Ricerca e scuole',
     icon: 'GraduationCap',
