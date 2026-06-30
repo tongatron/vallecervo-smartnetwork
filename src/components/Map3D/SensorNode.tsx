@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Html } from '@react-three/drei'
 import type { SensorType } from '../../data/sensors'
 import { categoryMeta } from '../../data/sensors'
-import { toWorld } from './terrainUtils'
+import { llToWorld } from './terrainUtils'
 
 interface Props {
   sensor: SensorType
@@ -13,7 +13,7 @@ interface Props {
 
 export default function SensorNode({ sensor, dimmed, onSelect, selected }: Props) {
   const [hover, setHover] = useState(false)
-  const [x, y, z] = toWorld(sensor.x, sensor.z)
+  const [x, y, z] = llToWorld(sensor.lon, sensor.lat)
   const color = categoryMeta[sensor.category].color
   const active = hover || selected
   const opacity = dimmed && !active ? 0.2 : 1

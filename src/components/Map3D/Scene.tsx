@@ -31,7 +31,7 @@ export default function Scene({ activePhase, showCoverage, activeCategories, sel
     <Canvas
       shadows
       dpr={[1, 2]}
-      camera={{ position: [9, 8, 11], fov: 42 }}
+      camera={{ position: [11, 9, 13], fov: 42 }}
       onPointerMissed={() => onSelect(null)}
     >
       <Sky sunPosition={[20, 12, 8]} turbidity={6} rayleigh={2} />
@@ -71,9 +71,9 @@ export default function Scene({ activePhase, showCoverage, activeCategories, sel
       <OrbitControls
         enablePan={false}
         minDistance={6}
-        maxDistance={22}
-        maxPolarAngle={Math.PI / 2.15}
-        target={[0, 1.5, 0]}
+        maxDistance={26}
+        maxPolarAngle={Math.PI / 2.1}
+        target={[0, 1, 0]}
       />
     </Canvas>
   )

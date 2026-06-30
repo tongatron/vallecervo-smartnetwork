@@ -1,7 +1,7 @@
 import { Html } from '@react-three/drei'
 import { useState } from 'react'
 import type { Gateway } from '../../data/gateways'
-import { toWorld, MAP_SIZE } from './terrainUtils'
+import { llToWorld, kmToWorld } from './terrainUtils'
 
 interface Props {
   gw: Gateway
@@ -14,12 +14,12 @@ interface Props {
 
 export default function GatewayNode({ gw, highlighted, dimmed, showCoverage, onSelect, selected }: Props) {
   const [hover, setHover] = useState(false)
-  const [x, y, z] = toWorld(gw.x, gw.z)
+  const [x, y, z] = llToWorld(gw.lon, gw.lat)
   const mastH = 0.9
   const accent = '#3DA5D9'
   const active = highlighted || selected || hover
   const opacity = dimmed && !active ? 0.25 : 1
-  const coverageR = (gw.coverage * MAP_SIZE) / 2
+  const coverageR = kmToWorld(gw.coverageKm)
 
   return (
     <group position={[x, y, z]}>

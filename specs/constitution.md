@@ -19,7 +19,8 @@ come tali. Ogni numero presente nel sito ha origine in `spec.md` o `plan.md`.
 ### III. Tutto open / self-contained dove possibile
 Coerente con lo spirito del progetto (ChirpStack, Grafana, PostgreSQL, Node-RED
 open source), il sito non dipende da servizi proprietari a pagamento. La mappa 3D
-è generata via codice (Three.js), senza tile o DEM esterni obbligatori.
+usa dati di elevazione DEM aperti (Terrarium / AWS Open Data) scaricati e "cotti"
+nel repo in fase di build: nessuna dipendenza esterna a runtime.
 
 ### IV. Accessibilità e responsività
 Contrasto AA, navigazione da tastiera, testo leggibile su mobile. La mappa 3D

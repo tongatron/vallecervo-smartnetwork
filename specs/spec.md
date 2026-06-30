@@ -30,7 +30,8 @@ PostgreSQL → Grafana / Node-RED. Backhaul: fibra / ponte radio / 4-5G / Starli
 Box con lo stack open source.
 
 ### FR-4 Mappa 3D interattiva (cuore del sito)
-- Rilievo stilizzato della Valle Cervo generato via Three.js (no DEM esterno).
+- Terreno reale della Valle Cervo da dati DEM (Terrarium/AWS Open Data) cotti nel repo.
+- Gateway e sensori alle coordinate geografiche reali dei siti candidati.
 - Marker **gateway** (6-8) nei siti candidati con cerchi/coni di copertura.
 - Marker **sensori** di esempio per categoria (torrente, pluviometro, meteo, frana,
   agricoltura, turismo).

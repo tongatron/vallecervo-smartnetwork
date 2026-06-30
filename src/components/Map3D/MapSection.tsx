@@ -39,8 +39,9 @@ export default function MapSection({ activePhase, setActivePhase }: Props) {
         <span className="eyebrow"><MapIcon size={14} /> Mappa interattiva</span>
         <h2 className="section-title">Una prima configurazione della rete</h2>
         <p className="section-intro">
-          Disposizione <strong>illustrativa</strong> di gateway e sensori sulla valle. Ruota, zooma e clicca
-          un nodo per i dettagli. Le posizioni e le coperture sono stilizzate, non geografiche.
+          Terreno ricostruito da dati di <strong>elevazione reali</strong> (DEM) della Valle Cervo. Gateway e
+          sensori sono posizionati alle coordinate dei siti candidati. Ruota, zooma e clicca un nodo per i
+          dettagli; i raggi di copertura sono stime indicative.
         </p>
 
         {/* Controlli */}
@@ -128,7 +129,7 @@ export default function MapSection({ activePhase, setActivePhase }: Props) {
           )}
         </div>
         <p style={{ color: 'var(--text-dim)', fontSize: 13, marginTop: 12 }}>
-          {gateways.length} gateway · {sensors.length} sensori d’esempio · rilievo stilizzato generato via codice.
+          {gateways.length} gateway · {sensors.length} sensori d’esempio · terreno da DEM reale (Terrarium, AWS Open Data).
         </p>
       </div>
     </section>
